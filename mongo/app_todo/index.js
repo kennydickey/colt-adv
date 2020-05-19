@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require ('express'), //, to chain declarations not req vv
   app = express(), //executing express as a function on app var
   port = process.env.PORT || 3000, //env or port# as a var
@@ -7,21 +9,23 @@ var todoRoutes = require('./routes/todos') //var to include the exports of our t
 
 app.use(bodyParser.json()); //these two lines allow us to access the request body of a put or post req ^^vv
 app.use(bodyParser.urlencoded({extended: true})); 
+// specifying implied root dirs to serve static assets
 
-require('dotenv').config()
-
-//app.listen() to start server
+// app.use(express.static('public')) this will work but..
+app.use(express.static(__dirname + '/public')) // to be more explicit
+  // this is for reference to css from html file
+app.use(express.static(__dirname + '/views'))
+  //to reference current dir/views for use such as below vv
+                                                        //vv
 //app.get() defining routes
 app.get('/', function(req, res){ //when requesting from ex. 3000/
-  res.send('hi from root route'); //http://localhost:3000/
-  //res.send('hi from express') //res.send is dynamic depending on content passed in.. ie str obj json
-  //or res.send({message: 'hi from obj'}) //sent as json
-  //or res.json({message: 'hi from obj'}) //same, more explicit, stringifys things, recog as json by postman
+  res.sendFile('index.html'); // currentdir/views/index.html
 })
 
 //specifying starting route so that all of our todo routes will be implied this way
 app.use('/api/todos', todoRoutes);
 
+//app.listen() to start server
 app.listen(process.env.PORT, function(){ //points to env file where PORT is declared. in c9, .env is already set
   console.log('app is running on port ' + port);
 }) //need to privide a port, for cloud9, simply use process.env.PORT rather than 3000 or whatever
