@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> <!-- to render on screen -->
+  <script src="https://unpkg.com/react-dom-factories@1.0.0/index.js"></script> <!-- to create the lems we want to create -->
+
+</head>
+<body>
+  <div id ="app"></div>
+  <script type="text/javascript">
+    class Pet extends React.Component { //every react component has a class
+      render() {//all components have a render method, which returns html we want to place in dom. We will use a factory provided by react-dom-factories to create elems for the pg
+        const h2 = ReactDOMFactories.h2(null, "moxie"); //1st param is what attributes you want inside h2, 2nt param is what you want inside h2 tag
+        const img = ReactDOMFactories.img({
+          src: "https://github.com/tigarcia/Moxie/raw/master/moxie.png",
+          // alt: "moxie"
+        });
+        //with react you can never return multiple components next to each other, always have to put inside one dom elem
+        const cardDiv =  ReactDOMFactories.div(null, h2, img) //h2 and img inside of div
+        return cardDiv;
+      }
+    }
+    //end of component
+    //tell react where to hook our components into the dom
+    ReactDOM.render(React.createElement(Pet), document.getElementById("app")); //1st param is elem you want to render, here we create an html elem out of out=r pet component. 2nd param is where in the dom to put it 
+  </script>
+</body>
+</html>
