@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Component</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> <!-- to render on screen -->
   <!-- replace dom factories with vv -->
@@ -14,11 +15,24 @@
   <script type="text/babel"> // babel needs to transpile react code into JS
     class Pet extends React.Component { //every react component has a class
       render() {//all components have a render method, which returns html we want to place in dom.
+        //add styles by declaring a js obj that represents our css
+        //notice fontSize is camelCase for js vs ke-bob and requires qoutes for js to compile
+        const liStyle = {fontSize: '1.5em'};
         //note: all jsx tags must be closed, ex.. / or </img>
         return ( //jsx within this code block vv
-          <div>
-            <h2>moxie</h2>
+        //bc babel cannot differentiate js class ..kw reserved by js and html class, so..
+          <div className="card"> {/* jsx note inline.. className is a valid Element obj*/}
+            {
+              //jsx note for block
+            }
+            <h2 className="name">moxie</h2>
             <img src="https://github.com/tigarcia/Moxie/raw/master/moxie.png" alt="moxie"></img> 
+            <h5 style={{fontSize: '2em', margin: '2px'}}>Hobbies:</h5> {/* direct obj */}
+            <ul>
+              <li style={liStyle}>sleep</li> {/* curly braces tell jsx to evaluate js here */}
+              <li style={liStyle}>eat</li> {/* {liStyle = fontSize: '1.5em'} obj */}
+            </ul>
+            {5 + 5 + ' green' + ' blue' /* examples of js adding to dom */}
           </div>
         );
       }
