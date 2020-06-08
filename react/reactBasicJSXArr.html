@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> <!-- to render on screen -->
+  <!-- replace dom factories with vv -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script> <!-- to create the elems we want to create -->
+</head>
+<body>
+  <div id ="app"></div>
+  <script type="text/babel"> // babel needs to transpile react code into JS
+    class HobbyList extends React.Component{ // new class to render hobby list
+      render() {
+        const hobbies = ['sleeping', 'eating', 'cuddling'];
+        const liStyle = {fontSize: '1.5em'}; //vars need to be defined in each component I think
+        return (
+        <ul>
+          {hobbies.map((h, i) => {
+            {/* each child in arr / iterator should have unique key. here we use index of arr, but only for an unchanging arr*/}
+            return <li key={i} style = {liStyle}>{h}</li>
+          })}
+            {/*<li style={liStyle}>sleep</li>*/}
+        </ul>
+        );
+      }
+    }
+    class Pet extends React.Component { //every react component has a class
+      render() {//all components have a render method, which returns html we want to place in dom.
+        //add styles by declaring a js obj that represents our css
+        //notice fontSize is camelCase for js vs ke-bob and requires qoutes for js to compile
+        const liStyle = {fontSize: '1.5em'};
+        
+        //note: all jsx tags must be closed, ex.. / or </img>
+        return ( //jsx within this code block vv
+        //bc babel cannot differentiate js class ..kw reserved by js and html class, so..
+          <div className="card"> {/* jsx note inline.. className is a valid Element obj*/}
+            {
+              //jsx note for block
+            }
+            <h2 className="name">moxie</h2>
+            <img src="https://github.com/tigarcia/Moxie/raw/master/moxie.png" alt="moxie"></img> 
+            <h5 style={{fontSize: '2em', margin: '2px'}}>Hobbies:</h5> {/* direct obj */}
+
+            {5 + 5 + ' green' + ' blue' /* examples of js adding to dom */}
+            <HobbyList />
+          </div>
+        );
+      }
+    }
+    //end of component
+    //tell react where to hook our components into the dom
+    //we can also use jsx here in place of React.createElement() using closure tag < />
+    ReactDOM.render(<Pet />, document.getElementById("app")); //1st param is elem you want to render, here we create an html elem out of out=r pet component. 2nd param is where in the dom to put it 
+  </script>
+</body>
+</html>
