@@ -24,4 +24,6 @@ function App() {
   );
 }
 
-export default App;
+// as opposed to export {App}..
+export default App; // this allows us to import App from './App' without {}
+
