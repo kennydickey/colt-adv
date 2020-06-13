@@ -1,18 +1,22 @@
 import React from 'react';
 // import logo from './logo.svg';
-import Recipe from './Recipe'
+// import Recipe from './Recipe';
+import Navbar from './Navbar';
+import RecipeList from './RecipeList'
 import './RecipeApp.css';
 
 function RecipeApp() {
   return (
-    <div className="App">
-      <Recipe 
-      title="pasta" 
-      ingredients={['flour', 'water']}
-      instructions="mix ingredients"
-      img="MM-Cookies-3.jpg"
-      />
-    </div>
+      <div className="App">
+        <Navbar />
+        <RecipeList />
+        {/* <Recipe 
+        title="Cookies" 
+        ingredients={['flour', 'water']}
+        instructions="mix ingredients"
+        img="MM-Cookies-3.jpg"
+        /> */}
+      </div>
   );
 }
 
