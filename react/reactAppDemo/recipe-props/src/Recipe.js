@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './Recipe.css'
 
 class Recipe extends Component {
+  static propTypes = {
+      title: PropTypes.string.isRequired,
+      ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+      instructions: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+  }
   render() {
     const {title, img, instructions} = this.props; //destructuring used to create a const called title that is this.props.title 
     const ingredients = this.props.ingredients.map((ing, index) => (
@@ -17,7 +24,7 @@ class Recipe extends Component {
         <img src={img} alt={title}/>
       </div>
       <div className = "recipe-card-content">
-        <h3 className="recipe-title">Recipe {title/*this.props.title*/}</h3>
+        <h3 className="recipe-title">{title/*this.props.title*/}</h3>
         <h4>Ingredients</h4>
         <ul>
           {ingredients}
@@ -30,5 +37,6 @@ class Recipe extends Component {
     );
   }
 }
+
 
 export default Recipe;
