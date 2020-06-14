@@ -11,10 +11,10 @@ class Recipe extends Component {
   }
   render() {
     const {title, img, instructions} = this.props; //destructuring used to create a const called title that is this.props.title 
-    const ingredients = this.props.ingredients.map((ing, index) => (
+    const ingredients = this.props.ingredients.map((ingred, index) => (
       //no {} or return needed for es6
       //parens here to wrap statement, works without. jsx standard?
-      <li key={index}>{ing}</li>
+      <li key={index}>{ingred}</li> //ingredients in an li while specifying a key, index is good enough for a key here. With map, we are simply iterating over each arr elem
     ));
      // () is needed to wrap statement so that js will not place an auto semicolon until after the statement
     return (
