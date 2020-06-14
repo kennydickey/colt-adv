@@ -33,10 +33,11 @@ static propTypes = {
 
  render() {
   const recipes = this.props.recipes.map((r,index) => (
-   <Recipe key={index} {...r} />
+   <Recipe key={index} {...r} /> //placing elems from props into our recipe component and rendering it
+   //{...r} replaces title={r.title} ingredients={r.ingredients} etc..
   ));
 
-  return (
+  return ( //this is within the render() method
    <div className="recipe-list">
     {recipes}
    </div> 
