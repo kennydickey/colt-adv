@@ -1,3 +1,4 @@
+//2nd version without stateless
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //import logo from './logo.svg';

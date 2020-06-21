@@ -1,9 +1,28 @@
-//1st app without architecture
+// version 3 stateless with props
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import PropTypes from 'prop-types';
+//import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+const InstructorItem = props => { //always props passed in
+ //static propTypes = { //removed from component
+ //we cannot use static here bc not in a class
+ //render() { //render not needed, alreeady inside of a fn
+ return ( //props is now a param, so no this.etc needed
+  <li>
+    <h3>{props.name}</h3>
+    <h4>Hobbies: {props.hobbies.join(", ")}</h4>
+  </li>
+ );
+ //}
+}
+//^V
+InstructorItem.propTypes = {
+ name: PropTypes.string,
+ hobbies: PropTypes.arrayOf(PropTypes.string)
+}
+
+class AppStateless extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,18 +80,25 @@ class App extends Component {
         //   hobbies: [...inst.hobbies.slice(0, hobbyIndex).concat(inst.hobbies.slice(hobbyIndex+1, inst.hobbies.length))]
         // } : inst; // if not, then return original instructor
       });
-      this.setState({instructors});
+      this.setState({instructors}); // whenever setState is called, render is called vv
     }, 5000)
 
   } // ^within props
 
   render() {
-    const instructors = this.state.instructors.map((instructor, index) => (
-      <li key={index}>
-        <h3>{instructor.name}</h3>
-        <h4>Hobbies: {instructor.hobbies.join(", ")}</h4>
-      </li>
+    const instructors = this.state.instructors.map((instructor, index) => ( // rendering new instructor items, any new instructor vals will get re rendered in the dom
+      // <li key={index}>
+      //   <h3>{instructor.name}</h3>
+      //   <h4>Hobbies: {instructor.hobbies.join(", ")}</h4>
+      // </li>
+      <InstructorItem //a lot like calling a fn here and passing in values below
+       key={index}
+       name={instructor.name} //is a prop
+       hobbies={instructor.hobbies} //is a prop
+      />
+
     ));
+    //still within render
     return (
       <div className="App">
         <ul>
@@ -83,4 +109,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppStateless;
